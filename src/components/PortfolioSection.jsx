@@ -6,14 +6,14 @@ import { MapPin } from 'lucide-react'
 gsap.registerPlugin(ScrollTrigger)
 
 const photos = [
-    { src: '/images/502384149_18404199847105503_1538263550173533133_n.jpg', width: 9, height: 16, location: 'Céu do Rio, RJ' },
-    { src: '/images/548924295_1995910624563765_2432624860547887782_n.jpg', width: 9, height: 16, location: 'Barra da Tijuca, RJ' },
-    { src: '/images/549828836_18419332501105503_501138226348757160_n.jpg', width: 4, height: 3, location: 'Aterro do Flamengo, RJ' },
-    { src: '/images/553355470_18420160678105503_5472667598786832043_n.jpg', width: 4, height: 3, location: 'Arpoador, RJ' },
-    { src: '/images/587876238_18432206857105503_1258831775249206120_n.jpg', width: 3, height: 4, location: 'Praia, RJ' },
-    { src: '/images/589004906_18432206917105503_6478607421801332213_n.jpg', width: 3, height: 4, location: 'Rio de Janeiro, RJ' },
-    { src: '/images/627675207_18442375864105503_3735472153034728000_n.jpg', width: 3, height: 4, location: 'Escadaria Selarón, Lapa' },
-    { src: '/images/628082706_18442375855105503_6809800093599802379_n.jpg', width: 3, height: 4, location: 'Centro, RJ' },
+    { src: '/images/502384149_18404199847105503_1538263550173533133_n.jpg', width: 9, height: 16, location: 'Resende, RJ', iso: '100', fstop: 'f/8.0', shutter: '1/200' },
+    { src: '/images/548924295_1995910624563765_2432624860547887782_n.jpg', width: 9, height: 16, location: 'Iguaba Grande, RJ', iso: '200', fstop: 'f/4.0', shutter: '1/500' },
+    { src: '/images/549828836_18419332501105503_501138226348757160_n.jpg', width: 4, height: 3, location: 'Aterro do Flamengo, RJ', iso: '400', fstop: 'f/2.8', shutter: '1/1000' },
+    { src: '/images/553355470_18420160678105503_5472667598786832043_n.jpg', width: 4, height: 3, location: 'Praia da Joatinga, RJ', iso: '50', fstop: 'f/11', shutter: '1/60' },
+    { src: '/images/587876238_18432206857105503_1258831775249206120_n.jpg', width: 3, height: 4, location: 'Ipanema, RJ', iso: '800', fstop: 'f/1.8', shutter: '1/50' },
+    { src: '/images/589004906_18432206917105503_6478607421801332213_n.jpg', width: 3, height: 4, location: 'Praia do Pepê, Barra da Tijuca', iso: '100', fstop: 'f/5.6', shutter: '1/250' },
+    { src: '/images/627675207_18442375864105503_3735472153034728000_n.jpg', width: 3, height: 4, location: 'Escadaria Selarón, Lapa', iso: '400', fstop: 'f/2.0', shutter: '1/400' },
+    { src: '/images/628082706_18442375855105503_6809800093599802379_n.jpg', width: 3, height: 4, location: 'Escadaria Selarón, Lapa', iso: '1600', fstop: 'f/2.8', shutter: '1/125' },
 ]
 
 function PortfolioSection() {
@@ -94,7 +94,14 @@ function PortfolioSection() {
                 {/* Masonry Grid */}
                 <div ref={gridRef} className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
                     {photos.map((photo, index) => (
-                        <div key={index} className="portfolio-item group cursor-pointer relative overflow-hidden rounded-2xl bg-warm-gray/5">
+                        <div
+                            key={index}
+                            className="portfolio-item group cursor-none relative overflow-hidden rounded-2xl bg-warm-gray/5"
+                            data-lens-hover="true"
+                            data-iso={photo.iso}
+                            data-fstop={photo.fstop}
+                            data-shutter={photo.shutter}
+                        >
                             <div className="overflow-hidden">
                                 <img
                                     src={photo.src}

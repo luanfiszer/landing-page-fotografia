@@ -68,37 +68,46 @@ function HorizontalExperience() {
     const triggerRef = useRef(null)
 
     useEffect(() => {
-        const pin = gsap.fromTo(
-            sectionRef.current,
-            {
-                translateX: 0,
-            },
-            {
-                translateX: "-300vw",
-                ease: "none",
-                duration: 1,
-                scrollTrigger: {
-                    trigger: triggerRef.current,
-                    start: "top top",
-                    end: "2000 top",
-                    scrub: 0.6,
-                    pin: true,
-                    anticipatePin: 1,
+        const mm = gsap.matchMedia()
+
+        // Desktop Animation
+        mm.add("(min-width: 768px)", () => {
+            const pin = gsap.fromTo(
+                sectionRef.current,
+                {
+                    translateX: 0,
                 },
+                {
+                    translateX: "-400vw", // Move enough to show the last section (500vw total - 100vw viewport)
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: triggerRef.current,
+                        start: "top top",
+                        end: "3000 top",
+                        scrub: 0.6,
+                        pin: true,
+                        anticipatePin: 1,
+                    },
+                }
+            )
+            return () => {
+                pin.kill()
             }
-        )
-        return () => {
-            pin.kill()
-        }
+        })
+
+        return () => mm.revert()
     }, [])
 
     return (
-        <section className="overflow-hidden bg-warm-white">
+        <section className="bg-warm-white relative">
             <div ref={triggerRef}>
-                <div ref={sectionRef} className="flex flex-row w-[400vw] h-screen relative items-center">
+                <div
+                    ref={sectionRef}
+                    className="flex flex-col md:flex-row w-full md:w-[500vw] h-auto md:h-screen relative items-center"
+                >
 
                     {/* Intro Section */}
-                    <div className="w-[100vw] h-screen flex flex-col items-center justify-center px-6">
+                    <div className="w-full md:w-[100vw] h-screen flex flex-col items-center justify-center px-6 shrink-0 sticky top-0 md:static">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-tropical-green/10 text-tropical-green font-[family-name:var(--font-outfit)] font-semibold text-sm tracking-wider uppercase mb-4">
                             A Experiência
                         </span>
@@ -110,7 +119,8 @@ function HorizontalExperience() {
                         </h2>
                         <p className="font-[family-name:var(--font-inter)] text-warm-gray text-xl max-w-2xl mx-auto text-center leading-relaxed">
                             Mais que uma fotógrafa, uma diretora criativa. <br />
-                            <span className="text-sm uppercase tracking-widest mt-8 block animate-pulse">Role para explorar →</span>
+                            <span className="text-sm uppercase tracking-widest mt-8 block animate-pulse md:hidden">Role para baixo ↓</span>
+                            <span className="text-sm uppercase tracking-widest mt-8 hidden md:block animate-pulse">Role para explorar →</span>
                         </p>
                     </div>
 
@@ -118,15 +128,15 @@ function HorizontalExperience() {
                     {features.map((feature, index) => {
                         const IconComponent = feature.icon
                         return (
-                            <div key={index} className="w-[50vw] h-full flex items-center justify-center px-10">
-                                <div className="bg-white rounded-[40px] p-12 border border-sun-yellow/10 shadow-2xl shadow-sun-yellow/5 hover:border-sun-yellow/30 transition-all duration-500 w-full max-w-lg">
-                                    <div className={`w-20 h-20 ${feature.bgColor} rounded-3xl flex items-center justify-center mb-8`}>
-                                        <IconComponent className={`w-10 h-10 ${iconColors[feature.color]}`} />
+                            <div key={index} className="w-full md:w-[50vw] h-auto md:h-full flex items-center justify-center px-6 py-12 md:p-10 shrink-0">
+                                <div className="bg-white rounded-[40px] p-8 md:p-12 border border-sun-yellow/10 shadow-xl md:shadow-2xl shadow-sun-yellow/5 hover:border-sun-yellow/30 transition-all duration-500 w-full max-w-lg">
+                                    <div className={`w-16 h-16 md:w-20 md:h-20 ${feature.bgColor} rounded-3xl flex items-center justify-center mb-6 md:mb-8`}>
+                                        <IconComponent className={`w-8 h-8 md:w-10 md:h-10 ${iconColors[feature.color]}`} />
                                     </div>
-                                    <h3 className="font-[family-name:var(--font-outfit)] font-black text-3xl text-deep-brown mb-4 uppercase tracking-tight">
+                                    <h3 className="font-[family-name:var(--font-outfit)] font-black text-2xl md:text-3xl text-deep-brown mb-3 md:mb-4 uppercase tracking-tight">
                                         {feature.title}
                                     </h3>
-                                    <p className="font-[family-name:var(--font-inter)] text-warm-gray text-lg leading-relaxed">
+                                    <p className="font-[family-name:var(--font-inter)] text-warm-gray text-base md:text-lg leading-relaxed">
                                         {feature.description}
                                     </p>
                                 </div>
@@ -135,11 +145,11 @@ function HorizontalExperience() {
                     })}
 
                     {/* Outro Section */}
-                    <div className="w-[100vw] h-screen flex flex-col items-center justify-center px-6">
+                    <div className="w-full md:w-[100vw] h-[60vh] md:h-screen flex flex-col items-center justify-center px-6 shrink-0">
                         <h2 className="font-[family-name:var(--font-outfit)] font-black text-4xl md:text-6xl text-deep-brown mb-8 text-center">
                             Pronta para brilhar?
                         </h2>
-                        <a href="#contact" className="btn-solar text-2xl px-12 py-6">
+                        <a href="#contact" className="btn-solar text-lg md:text-2xl px-8 md:px-12 py-4 md:py-6">
                             ☀️ Reservar meu lugar ao sol
                         </a>
                     </div>

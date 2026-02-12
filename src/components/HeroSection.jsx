@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import SplitType from 'split-type'
 import { ChevronDown, MapPin } from 'lucide-react'
 
 function HeroSection() {
@@ -15,30 +16,8 @@ function HeroSection() {
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
 
-            // Word-aware character split reveal for title
-            const title = titleRef.current
-            const text = title.textContent
-            title.innerHTML = ''
-
-            const words = text.split(' ')
-            words.forEach((word, wordIndex) => {
-                const wordSpan = document.createElement('span')
-                wordSpan.className = 'inline-block whitespace-nowrap'
-
-                word.split('').forEach((char) => {
-                    const charSpan = document.createElement('span')
-                    charSpan.textContent = char
-                    charSpan.className = 'inline-block char'
-                    wordSpan.appendChild(charSpan)
-                })
-
-                title.appendChild(wordSpan)
-
-                // Add regular space to allow wrapping between words
-                if (wordIndex < words.length - 1) {
-                    title.appendChild(document.createTextNode(' '))
-                }
-            })
+            // Split text using SplitType
+            const titleSplit = new SplitType(titleRef.current, { types: 'lines,words,chars' })
 
             tl.from(bgRef.current, {
                 scale: 1.2,
@@ -50,7 +29,7 @@ function HeroSection() {
                     y: 20,
                     duration: 0.8
                 }, '-=1.8')
-                .from(title.querySelectorAll('.char'), {
+                .from(titleSplit.chars, {
                     opacity: 0,
                     y: 100,
                     rotateX: -90,
@@ -119,7 +98,8 @@ function HeroSection() {
 
                 <h1
                     ref={titleRef}
-                    className="font-[family-name:var(--font-outfit)] font-black text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-white mb-6 drop-shadow-[0_4px_30px_rgba(0,0,0,0.15)] perspective-[1000px]"
+                    className="font-[family-name:var(--font-outfit)] font-black text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-white mb-6 drop-shadow-[0_4px_30px_rgba(0,0,0,0.15)] perspective-[1000px] break-words"
+                    style={{ wordBreak: 'keep-all', overflowWrap: 'break-word' }}
                 >
                     Sua Essência, na Vibe Solar do Rio.
                 </h1>

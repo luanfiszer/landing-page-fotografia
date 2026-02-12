@@ -4,7 +4,7 @@ import { Star, Quote } from 'lucide-react'
 
 const testimonials = [
     {
-        name: 'Mariana Costa',
+        name: 'Rebecca Corrêa',
         role: 'Ensaio de Aniversário',
         quote:
             'Raquel capturou exatamente a vibe que eu queria! As fotos ficaram tão naturais e cheias de vida. Me senti uma deusa na praia de Ipanema! 🌊',
@@ -12,7 +12,7 @@ const testimonials = [
         rating: 5,
     },
     {
-        name: 'Juliana Santos',
+        name: 'Sarah Souza',
         role: 'Ensaio de Casal',
         quote:
             'Eu e meu noivo estávamos super nervosos, mas a Raquel nos deixou tão à vontade que esquecemos da câmera. O resultado? Fotos dignas de capa de revista!',
@@ -20,7 +20,7 @@ const testimonials = [
         rating: 5,
     },
     {
-        name: 'Beatriz Lima',
+        name: 'Carol Ferreira',
         role: 'Ensaio Solo',
         quote:
             'A melhor fotógrafa do Rio, sem dúvida! Ela sabe exatamente como usar a luz natural carioca pra criar aquela mágica que só o Rio tem. Amei cada foto!',
@@ -28,7 +28,7 @@ const testimonials = [
         rating: 5,
     },
     {
-        name: 'Carolina Ferreira',
+        name: 'Jayna Vieira',
         role: 'Ensaio de Família',
         quote:
             'Raquel conseguiu fotografar meus filhos correndo na praia com uma naturalidade incrível. As fotos parecem saídas de um filme. Emoção pura!',

@@ -30,7 +30,12 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-outfit);
 }
 
@@ -184,4 +189,182 @@ h1, h2, h3, h4, h5, h6 {
 
 .solar-input::placeholder {
   color: var(--color-warm-gray);
+}
+
+/* --- Golden Hour Mode --- */
+body {
+  transition: background-color 3s ease, color 3s ease;
+}
+
+body.golden-hour {
+  --color-sand-beige: #FDEBD0;
+  /* More orange/golden */
+  --color-sun-yellow: #FF9F1C;
+  --color-ocean-blue: #2EC4B6;
+  background-color: var(--color-sand-beige);
+}
+
+body.golden-hour .portfolio-overlay {
+  background: linear-gradient(to top, rgba(255, 143, 102, 0.9) 0%, rgba(255, 107, 53, 0.5) 50%, transparent 100%);
+}
+
+/* --- Film Roll Progress Bar --- */
+.film-roll-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background-color: #1a1a1a;
+  z-index: 40;
+  /* Lower than navbar (z-50) */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.film-roll-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.film-perforation {
+  width: 4px;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.film-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-sun-yellow), var(--color-sunset-orange));
+  mix-blend-mode: normal;
+  width: 0%;
+  /* Updates with JS */
+  transition: width 0.1s linear;
+  opacity: 0.8;
+}
+
+/* --- Lens Cursor --- */
+.lens-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-deep-brown);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(0px);
+}
+
+.lens-cursor.active {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border-color: var(--color-sun-yellow);
+}
+
+.lens-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.lens-cursor.active .lens-corner-tl {
+  top: 10px;
+  left: 10px;
+  border-top-color: white;
+  border-left-color: white;
+}
+
+.lens-cursor.active .lens-corner-tr {
+  top: 10px;
+  right: 10px;
+  border-top-color: white;
+  border-right-color: white;
+}
+
+.lens-cursor.active .lens-corner-bl {
+  bottom: 10px;
+  left: 10px;
+  border-bottom-color: white;
+  border-left-color: white;
+}
+
+.lens-cursor.active .lens-corner-br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom-color: white;
+  border-right-color: white;
+}
+
+.lens-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-outfit);
+  font-size: 0.75rem;
+  color: white;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.lens-cursor.active .lens-info {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- Instagram Story Ring --- */
+.insta-story-ring {
+  position: relative;
+  display: inline-block;
+  padding: 4px;
+  /* Space for ring */
+  border-radius: 50%;
+}
+
+.insta-story-ring::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #F58529, #FEDA77, #DD2A7B, #8134AF, #515BD4);
+  z-index: -1;
+  animation: spin 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.insta-story-ring.has-story::before {
+  opacity: 1;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

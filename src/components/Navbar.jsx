@@ -32,11 +32,24 @@ function Navbar() {
         >
             <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
                 {/* Logo */}
-                <a href="#hero" className="flex items-center gap-2 group">
-                    <Sun className="w-8 h-8 text-sun-yellow transition-transform duration-500 group-hover:rotate-180" />
-                    <span className="font-[family-name:var(--font-outfit)] font-bold text-xl text-deep-brown tracking-tight">
-                        Raquel<span className="text-sunset-orange">Paiva</span>
-                    </span>
+                <a href="#hero" className="flex items-center gap-3 group">
+                    <div className="relative">
+                        <div className="insta-story-ring has-story">
+                            <img
+                                src="/images/logo.jpg"
+                                alt="Raquel Paiva"
+                                className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <span className="font-[family-name:var(--font-outfit)] font-bold text-xl text-deep-brown tracking-tight block leading-none">
+                            Raquel<span className="text-sunset-orange">Paiva</span>
+                        </span>
+                        <span className="text-[10px] font-[family-name:var(--font-inter)] text-warm-gray uppercase tracking-widest block leading-none mt-1">
+                            Fotografia
+                        </span>
+                    </div>
                 </a>
 
                 {/* Desktop Links */}
