@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sun-yellow: #F5A623;
+  --color-sun-yellow-light: #FFC857;
+  --color-ocean-blue: #1A8FE3;
+  --color-ocean-blue-light: #4DB4FF;
+  --color-tropical-green: #2ECC71;
+  --color-tropical-green-light: #5DEDA0;
+  --color-sunset-orange: #FF6B35;
+  --color-sunset-orange-light: #FF8F66;
+  --color-sand-beige: #FDF6EC;
+  --color-warm-white: #FFFDF9;
+  --color-warm-gray: #8B7E6A;
+  --color-deep-brown: #3D2C1E;
+
+  --font-outfit: "Outfit", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--color-sand-beige);
+  color: var(--color-deep-brown);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-sand-beige);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--color-sun-yellow), var(--color-sunset-orange));
+  border-radius: 999px;
+}
+
+/* Sun flare effect */
+.sun-flare {
+  position: relative;
+}
+
+.sun-flare::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Wave shape divider */
+.wave-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 80px;
+}
+
+/* Gradient button */
+.btn-solar {
+  background: linear-gradient(135deg, var(--color-sun-yellow) 0%, var(--color-sunset-orange) 100%);
+  color: white;
+  font-family: var(--font-outfit);
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.35);
+  transition: all 0.3s ease;
+}
+
+.btn-solar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
+}
+
+/* Glassmorphism navbar */
+.glass-nav {
+  background: rgba(255, 253, 249, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(245, 166, 35, 0.15);
+}
+
+/* Masonry portfolio hover overlay */
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.portfolio-item img {
+  transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.08);
+}
+
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(245, 166, 35, 0.85) 0%, rgba(255, 107, 53, 0.4) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+/* Section decorative shapes */
+.organic-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Testimonial card */
+.testimonial-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(61, 44, 30, 0.06);
+  border: 1px solid rgba(245, 166, 35, 0.1);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(245, 166, 35, 0.12);
+}
+
+/* Form inputs */
+.solar-input {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 2px solid rgba(245, 166, 35, 0.2);
+  background: white;
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  color: var(--color-deep-brown);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.solar-input:focus {
+  border-color: var(--color-sun-yellow);
+  box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.1);
+}
+
+.solar-input::placeholder {
+  color: var(--color-warm-gray);
+}
