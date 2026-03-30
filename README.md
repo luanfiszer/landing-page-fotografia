@@ -110,6 +110,3 @@ npm run dev
 Este projeto está licenciado sob a Licença ISC.
 
 ---
-<div align="center">
-  <sub>Desenvolvido com ❤️ por <a href="https://github.com/luanfiszer">Luan Fiszer</a> usando o Antigravity AI</sub>
-</div>
