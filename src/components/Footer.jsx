@@ -1,57 +1,41 @@
-import { Sun, Instagram, Mail, Heart } from 'lucide-react'
+import { Instagram, Mail, Heart } from 'lucide-react'
 
 function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="relative bg-deep-brown overflow-hidden">
-            {/* Top decorative wave */}
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
-                <svg
-                    viewBox="0 0 1440 80"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-full h-auto"
-                    preserveAspectRatio="none"
-                >
-                    <path
-                        d="M0,40 C360,80 720,0 1080,60 C1260,30 1380,50 1440,20 L1440,0 L0,0 Z"
-                        fill="#FDF6EC"
-                    />
-                </svg>
+        <footer className="relative bg-brand-text pt-32 pb-16 overflow-hidden border-t border-white/5">
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
+                <div className="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:40px_40px]" />
             </div>
 
-            {/* Gradient accent line */}
-            <div className="h-1 bg-gradient-to-r from-sun-yellow via-sunset-orange to-ocean-blue" />
-
-            <div className="max-w-7xl mx-auto px-6 pt-20 pb-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-32">
                     {/* Brand */}
-                    <div>
-                        <a href="#hero" className="flex items-center gap-2 mb-4">
-                            <Sun className="w-8 h-8 text-sun-yellow" />
-                            <span className="font-[family-name:var(--font-outfit)] font-bold text-2xl text-white tracking-tight">
-                                Raquel<span className="text-sunset-orange">Paiva</span>
+                    <div className="md:col-span-6">
+                        <a href="#hero" className="inline-block mb-10">
+                            <span className="font-display font-bold text-4xl text-white tracking-tighter">
+                                RAQUEL <span className="text-accent underline decoration-accent/20 underline-offset-8">PAIVA</span>
                             </span>
                         </a>
-                        <p className="font-[family-name:var(--font-inter)] text-white/50 text-sm leading-relaxed max-w-xs">
-                            Fotógrafa e diretora criativa capturando a essência solar do Rio de Janeiro.
-                            Cada clique é uma celebração de luz e vida.
+                        <p className="text-white/40 text-xl font-medium leading-relaxed max-w-md">
+                            Curadoria visual e direção de arte sob a luz do Rio. Eternizando sua essência com estética vibrante e alma solar.
                         </p>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h4 className="font-[family-name:var(--font-outfit)] font-bold text-white mb-6 text-lg">
+                    {/* Navigation */}
+                    <div className="md:col-span-3">
+                        <h4 className="font-display font-bold text-white mb-10 text-[10px] uppercase tracking-[0.4em]">
                             Navegação
                         </h4>
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-6">
                             {['Início', 'Portfolio', 'Experiência', 'Depoimentos', 'Contato'].map(
                                 (link) => (
                                     <a
                                         key={link}
                                         href={`#${link.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`}
-                                        className="font-[family-name:var(--font-inter)] text-white/50 hover:text-sun-yellow transition-colors duration-300 text-sm"
+                                        className="text-white/30 hover:text-accent transition-colors duration-300 text-sm font-bold uppercase tracking-widest"
                                     >
                                         {link}
                                     </a>
@@ -60,48 +44,46 @@ function Footer() {
                         </div>
                     </div>
 
-                    {/* Social / Contact */}
-                    <div>
-                        <h4 className="font-[family-name:var(--font-outfit)] font-bold text-white mb-6 text-lg">
-                            Conecte-se
+                    {/* Social */}
+                    <div className="md:col-span-3">
+                        <h4 className="font-display font-bold text-white mb-10 text-[10px] uppercase tracking-[0.4em]">
+                            Social
                         </h4>
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-8">
                             <a
                                 href="https://instagram.com/paiva.vision"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-3 text-white/50 hover:text-sunset-orange transition-colors duration-300"
+                                className="group flex items-center gap-4 text-white/30 hover:text-accent transition-colors duration-300"
                             >
-                                <Instagram className="w-5 h-5" />
-                                <span className="font-[family-name:var(--font-inter)] text-sm">@paiva.vision</span>
+                                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-accent/10 transition-colors">
+                                    <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                </div>
+                                <span className="text-sm font-bold uppercase tracking-widest">@paiva.vision</span>
                             </a>
                             <a
                                 href="mailto:assessoriaraquelpaiva@gmail.com"
-                                className="flex items-center gap-3 text-white/50 hover:text-sun-yellow transition-colors duration-300"
+                                className="group flex items-center gap-4 text-white/30 hover:text-accent transition-colors duration-300"
                             >
-                                <Mail className="w-5 h-5" />
-                                <span className="font-[family-name:var(--font-inter)] text-sm">assessoriaraquelpaiva@gmail.com</span>
+                                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-accent/10 transition-colors">
+                                    <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                </div>
+                                <span className="text-sm font-bold uppercase tracking-widest">E-mail</span>
                             </a>
                         </div>
-
-                        {/* CTA */}
-                        <a
-                            href="#contact"
-                            className="inline-block mt-6 px-6 py-3 rounded-full bg-gradient-to-r from-sun-yellow to-sunset-orange text-white font-[family-name:var(--font-outfit)] font-bold text-sm hover:shadow-lg hover:shadow-sunset-orange/30 transition-all duration-300"
-                        >
-                            ☀️ Agendar Ensaio
-                        </a>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="font-[family-name:var(--font-inter)] text-white/30 text-sm">
-                        © {currentYear} Raquel Paiva Fotografia. Todos os direitos reservados.
+                <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <p className="text-white/10 text-[10px] uppercase tracking-widest font-display font-bold">
+                        © {currentYear} Raquel Paiva • Fotografia Autoral
                     </p>
-                    <p className="font-[family-name:var(--font-inter)] text-white/30 text-xs flex items-center gap-1">
-                        Feito com <Heart className="w-3 h-3 text-sunset-orange fill-sunset-orange" /> e luz solar no Rio de Janeiro
-                    </p>
+                    <div className="flex items-center gap-4 text-white/10 text-[10px] uppercase tracking-widest font-display font-bold">
+                        <span>Desenvolvido com Rigor Visual</span>
+                        <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                        <span>Rio de Janeiro</span>
+                    </div>
                 </div>
             </div>
         </footer>

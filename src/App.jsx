@@ -9,14 +9,10 @@ import HorizontalExperience from './components/HorizontalExperience'
 import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
-import CustomCursor from './components/CustomCursor'
-import { useGoldenHour } from './hooks/useGoldenHour'
 
 gsap.registerPlugin(ScrollTrigger)
 
 function App() {
-    // Enable Golden Hour mode
-    useGoldenHour()
 
     useEffect(() => {
         const lenis = new Lenis({
@@ -38,8 +34,10 @@ function App() {
     }, [])
 
     return (
-        <div className="min-h-screen bg-sand-beige text-deep-brown overflow-x-hidden selection:bg-sun-yellow selection:text-white">
-            <CustomCursor />
+        <div className="min-h-[100dvh] bg-brand-bg text-brand-text overflow-x-hidden selection:bg-accent selection:text-white font-sans">
+            {/* Grain Overlay */}
+            <div className="fixed inset-0 z-[100] pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+            
             <Navbar />
             <main>
                 <HeroSection />
