@@ -70,6 +70,14 @@ const photos = [
         span: 'md:col-span-4 md:row-span-1',
         position: 'object-[25%]'
     },
+    {
+        src: '/images/IMG_3082.jpeg',
+        location: 'Iguaba Grande, RJ',
+        iso: '1600',
+        fstop: 'f/1.8',
+        span: 'md:col-span-8 md:row-span-2',
+        position: 'object-center'
+    },
 ]
 
 function PortfolioSection() {
