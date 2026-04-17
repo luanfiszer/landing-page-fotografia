@@ -122,10 +122,10 @@ function PortfolioSection() {
     }, [])
 
     return (
-        <section ref={sectionRef} id="portfolio" className="relative py-40 bg-brand-bg overflow-hidden">
+        <section ref={sectionRef} id="portfolio" className="relative py-20 md:py-40 bg-brand-bg overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-6 relative z-10">
                 {/* Section Title */}
-                <div ref={titleRef} className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
+                <div ref={titleRef} className="mb-12 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-12">
                     <div className="max-w-2xl">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-display font-bold text-[10px] uppercase tracking-[0.3em] border border-accent/20 mb-8">
                             Curadoria Autoral

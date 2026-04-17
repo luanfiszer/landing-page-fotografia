@@ -4,14 +4,14 @@ function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="relative bg-brand-text pt-32 pb-16 overflow-hidden border-t border-white/5">
+        <footer className="relative bg-brand-text pt-16 md:pt-32 overflow-hidden border-t border-white/5" style={{ paddingBottom: 'max(4rem, env(safe-area-inset-bottom))' }}>
             {/* Background Texture */}
             <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
                 <div className="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:40px_40px]" />
             </div>
 
             <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-32">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 mb-12 md:mb-32">
                     {/* Brand */}
                     <div className="md:col-span-6">
                         <a href="#hero" className="inline-block mb-10">

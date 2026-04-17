@@ -42,13 +42,13 @@ function TestimonialsSection() {
     const titleInView = useInView(titleRef, { once: true, margin: '-100px' })
 
     return (
-        <section id="testimonials" className="relative py-40 bg-brand-bg overflow-hidden">
+        <section id="testimonials" className="relative py-20 md:py-40 bg-brand-bg overflow-hidden">
             {/* Solar Glow */}
             <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="max-w-[1400px] mx-auto px-6 relative z-10">
                 {/* Section Header - Right Aligned (Asymmetric) */}
-                <div ref={titleRef} className="flex flex-col items-end text-right mb-24">
+                <div ref={titleRef} className="flex flex-col items-end text-right mb-12 md:mb-24">
                     <motion.span
                         initial={{ opacity: 0, x: 20 }}
                         animate={titleInView ? { opacity: 1, x: 0 } : {}}

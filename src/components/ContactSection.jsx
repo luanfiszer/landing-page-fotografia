@@ -79,7 +79,7 @@ function ContactSection() {
     }
 
     return (
-        <section id="contact" className="relative py-40 bg-brand-bg overflow-hidden">
+        <section id="contact" className="relative py-20 md:py-40 bg-brand-bg overflow-hidden">
             {/* Background Grain/Texture */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
                 <div className="absolute inset-0 bg-[radial-gradient(#2d1b14_1px,transparent_1px)] [background-size:32px_32px]" />
