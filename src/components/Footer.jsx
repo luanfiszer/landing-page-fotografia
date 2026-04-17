@@ -30,17 +30,21 @@ function Footer() {
                             Navegação
                         </h4>
                         <div className="flex flex-col gap-6">
-                            {['Início', 'Portfolio', 'Experiência', 'Depoimentos', 'Contato'].map(
-                                (link) => (
-                                    <a
-                                        key={link}
-                                        href={`#${link.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`}
-                                        className="text-white/30 hover:text-accent transition-colors duration-300 text-sm font-bold uppercase tracking-widest"
-                                    >
-                                        {link}
-                                    </a>
-                                )
-                            )}
+                            {[
+                                { label: 'Início', href: '#hero' },
+                                { label: 'Portfolio', href: '#portfolio' },
+                                { label: 'Experiência', href: '#experience' },
+                                { label: 'Depoimentos', href: '#testimonials' },
+                                { label: 'Contato', href: '#contact' },
+                            ].map((link) => (
+                                <a
+                                    key={link.href}
+                                    href={link.href}
+                                    className="text-white/30 hover:text-accent transition-colors duration-300 text-sm font-bold uppercase tracking-widest"
+                                >
+                                    {link.label}
+                                </a>
+                            ))}
                         </div>
                     </div>
 

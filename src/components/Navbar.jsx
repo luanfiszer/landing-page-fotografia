@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Sun, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const navLinks = [
     { label: 'Início', href: '#hero' },
@@ -21,6 +21,12 @@ function Navbar() {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    // Block body scroll when mobile menu is open
+    useEffect(() => {
+        document.body.style.overflow = mobileOpen ? 'hidden' : ''
+        return () => { document.body.style.overflow = '' }
+    }, [mobileOpen])
 
     return (
         <motion.nav
@@ -45,7 +51,7 @@ function Navbar() {
                             Raquel <span className="text-accent underline decoration-accent/20 underline-offset-2">Paiva</span>
                         </span>
                         <span className="text-[10px] font-display text-brand-gray uppercase tracking-[0.3em] block leading-none mt-1">
-                            Fine Art Vision
+                            Visão Solar
                         </span>
                     </div>
                 </a>
@@ -72,6 +78,9 @@ function Navbar() {
                 {/* Mobile Toggle */}
                 <button
                     onClick={() => setMobileOpen(!mobileOpen)}
+                    aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
+                    aria-expanded={mobileOpen}
+                    aria-controls="mobile-menu"
                     className="md:hidden text-brand-text p-2"
                 >
                     {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -81,6 +90,7 @@ function Navbar() {
             {/* Mobile Menu */}
             {mobileOpen && (
                 <motion.div
+                    id="mobile-menu"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="fixed inset-0 top-0 left-0 w-full h-screen bg-brand-bg z-40 flex flex-col p-8 md:hidden"

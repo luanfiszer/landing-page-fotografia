@@ -63,10 +63,10 @@ function HorizontalExperience() {
                     scrollTrigger: {
                         trigger: triggerRef.current,
                         start: "top top",
-                        end: "2500 top",
+                        end: () => `+=${sectionRef.current.scrollWidth - window.innerWidth}`,
                         scrub: 1,
                         pin: true,
-                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
                     },
                 }
             )

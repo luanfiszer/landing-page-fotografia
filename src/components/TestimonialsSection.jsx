@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Star, Quote } from 'lucide-react'
+import { Quote } from 'lucide-react'
 
 const testimonials = [
     {
@@ -36,6 +36,44 @@ const testimonials = [
         rating: 5,
     },
 ]
+
+function TestimonialCard({ testimonial, index }) {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true, margin: '-50px' })
+
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className={`p-10 rounded-[3rem] bg-white border border-brand-text/5 flex flex-col justify-between hover:shadow-[0_20px_50px_rgba(249,115,22,0.1)] transition-all duration-500 shadow-sm will-change-transform ${
+                index % 2 !== 0 ? 'md:mt-16' : ''
+            }`}
+        >
+            <div>
+                <Quote className="w-10 h-10 text-accent/10 mb-8" />
+                <p className="text-brand-text/70 leading-snug mb-12 text-lg font-medium">
+                    "{testimonial.quote}"
+                </p>
+            </div>
+
+            <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-accent text-white flex items-center justify-center font-display font-bold text-lg shadow-lg shadow-accent/20">
+                    {testimonial.initials}
+                </div>
+                <div>
+                    <h4 className="font-display font-bold text-brand-text text-xl leading-none mb-1">
+                        {testimonial.name}
+                    </h4>
+                    <p className="text-accent font-display font-bold text-[10px] uppercase tracking-widest">
+                        {testimonial.role}
+                    </p>
+                </div>
+            </div>
+        </motion.div>
+    )
+}
 
 function TestimonialsSection() {
     const titleRef = useRef(null)
@@ -78,44 +116,9 @@ function TestimonialsSection() {
 
                 {/* Testimonials Grid - Asymmetric Stagger */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                    {testimonials.map((testimonial, index) => {
-                        const ref = useRef(null)
-                        const isInView = useInView(ref, { once: true, margin: '-50px' })
-
-                        return (
-                            <motion.div
-                                key={index}
-                                ref={ref}
-                                initial={{ opacity: 0, y: 40 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className={`p-10 rounded-[3rem] bg-white border border-brand-text/5 flex flex-col justify-between hover:shadow-[0_20px_50px_rgba(249,115,22,0.1)] transition-all duration-500 shadow-sm will-change-transform ${
-                                    index % 2 !== 0 ? 'md:mt-16' : ''
-                                }`}
-                            >
-                                <div>
-                                    <Quote className="w-10 h-10 text-accent/10 mb-8" />
-                                    <p className="text-brand-text/70 leading-snug mb-12 text-lg font-medium">
-                                        "{testimonial.quote}"
-                                    </p>
-                                </div>
-
-                                <div className="flex items-center gap-4">
-                                    <div className="w-14 h-14 rounded-2xl bg-accent text-white flex items-center justify-center font-display font-bold text-lg shadow-lg shadow-accent/20">
-                                        {testimonial.initials}
-                                    </div>
-                                    <div>
-                                        <h4 className="font-display font-bold text-brand-text text-xl leading-none mb-1">
-                                            {testimonial.name}
-                                        </h4>
-                                        <p className="text-accent font-display font-bold text-[10px] uppercase tracking-widest">
-                                            {testimonial.role}
-                                        </p>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )
-                    })}
+                    {testimonials.map((testimonial, index) => (
+                        <TestimonialCard key={index} testimonial={testimonial} index={index} />
+                    ))}
                 </div>
             </div>
         </section>
