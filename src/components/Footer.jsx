@@ -4,7 +4,7 @@ function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="relative bg-brand-text pt-16 md:pt-32 overflow-hidden border-t border-white/5" style={{ paddingBottom: 'max(4rem, env(safe-area-inset-bottom))' }}>
+        <footer className="relative bg-brand-text pt-16 md:pt-32 pb-16 overflow-hidden border-t border-white/5">
             {/* Background Texture */}
             <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
                 <div className="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:40px_40px]" />

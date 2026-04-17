@@ -16,6 +16,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Makes the overscroll area at the bottom match the footer color */
+html {
+  background-color: var(--color-brand-text);
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--color-brand-bg);
