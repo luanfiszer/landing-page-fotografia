@@ -1,3 +1,6 @@
+# Claude Code (may contain local tokens)
+.claude/
+
 # Dependencies
 node_modules/
 
