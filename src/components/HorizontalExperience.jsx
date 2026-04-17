@@ -77,14 +77,14 @@ function HorizontalExperience() {
     }, [])
 
     return (
-        <section className="bg-brand-bg relative overflow-hidden">
+        <section id="experience" className="bg-brand-bg relative overflow-hidden">
             {/* Background Aesthetic */}
             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
             
             <div ref={triggerRef}>
                 <div
                     ref={sectionRef}
-                    className="flex flex-col md:flex-row w-full md:w-[500vw] items-center"
+                    className="flex flex-col md:flex-row w-full md:w-[500vw] items-center will-change-transform"
                 >
 
                     {/* Intro Section */}

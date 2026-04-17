@@ -27,23 +27,25 @@ function HeroSection() {
 
             // Scroll Parallax + Overlay Darkening
             gsap.to(bgRef.current, {
-                yPercent: 30,
+                yPercent: 20,
                 scale: 1.1,
+                force3D: true,
+                z: 0.01,
                 scrollTrigger: {
                     trigger: heroRef.current,
                     start: "top top",
                     end: "bottom top",
-                    scrub: true
+                    scrub: 1, // Smoothing prevents shaking on raw input
                 }
             })
 
             gsap.to(overlayRef.current, {
-                backgroundColor: 'rgba(45, 27, 20, 0.8)',
+                opacity: 0.8,
                 scrollTrigger: {
                     trigger: heroRef.current,
                     start: "top top",
                     end: "bottom top",
-                    scrub: true
+                    scrub: 1
                 }
             })
         }, heroRef)
@@ -59,18 +61,25 @@ function HeroSection() {
         >
             {/* Background Image Container */}
             <div className="absolute inset-0 z-0">
-                <div 
+                <div
                     ref={bgRef}
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                    style={{ 
-                        backgroundImage: `url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1920&q=80')` 
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
+                    style={{
+                        backgroundImage: `url('/images/photo-1483729558449-99ef09a8c325.jpeg')`
                     }}
                 />
-                {/* Dynamic Gradient Overlay */}
-                <div 
+
+                {/* Darkening Overlay (Animação de opacidade) */}
+                <div
                     ref={overlayRef}
-                    className="absolute inset-0 bg-gradient-to-b from-brand-text/40 via-brand-text/20 to-brand-bg z-10 transition-colors duration-500" 
+                    className="absolute inset-0 bg-brand-text z-[12] opacity-0 will-change-opacity"
                 />
+
+                {/* Fade Superior (Melhora leitura do Navbar) */}
+                <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-text/60 to-transparent z-[13] pointer-events-none" />
+
+                {/* Fade Inferior (Garante transição invisível para a próxima seção) */}
+                <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-brand-bg via-brand-bg/80 to-transparent z-[14] pointer-events-none" />
             </div>
 
             <div className="container mx-auto px-6 relative z-20">
@@ -84,10 +93,11 @@ function HeroSection() {
 
                     <h1
                         ref={titleRef}
-                        className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[11rem] leading-[0.85] lg:leading-[0.8] tracking-tighter text-white mb-10 lg:mb-12 drop-shadow-2xl"
+                        className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[11rem] leading-[0.85] lg:leading-[0.8] tracking-tighter mb-10 lg:mb-12 drop-shadow-2xl"
                     >
-                        Visão <br />
-                        <span className="text-accent">Solar</span>.
+                        <span className="text-white">Visão</span> <br />
+                        <span className="text-accent">Solar</span>
+                        <span className="text-white">.</span>
                     </h1>
 
                     <p

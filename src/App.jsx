@@ -15,10 +15,15 @@ gsap.registerPlugin(ScrollTrigger)
 function App() {
 
     useEffect(() => {
+        // Only initialize Lenis on desktop/large screens (>= 1024px)
+        // Mobile browsers handle smooth scrolling natively and better on touch
+        if (window.innerWidth < 1024) return;
+
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smooth: true,
+            touchMultiplier: 2,
+            infinite: false,
         })
 
         function raf(time) {
@@ -35,8 +40,8 @@ function App() {
 
     return (
         <div className="min-h-[100dvh] bg-brand-bg text-brand-text overflow-x-hidden selection:bg-accent selection:text-white font-sans">
-            {/* Grain Overlay */}
-            <div className="fixed inset-0 z-[100] pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+            {/* Grain Overlay - Optimized for mobile by using standard opacity and no complex blend modes if possible */}
+            <div className="fixed inset-0 z-[100] pointer-events-none opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] md:mix-blend-overlay"></div>
             
             <Navbar />
             <main>

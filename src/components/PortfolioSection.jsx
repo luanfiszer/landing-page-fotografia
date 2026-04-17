@@ -6,61 +6,69 @@ import { MapPin, Camera, Aperture } from 'lucide-react'
 gsap.registerPlugin(ScrollTrigger)
 
 const photos = [
-    { 
-        src: '/images/502384149_18404199847105503_1538263550173533133_n.jpg', 
-        location: 'Resende, RJ', 
-        iso: '100', 
-        fstop: 'f/8.0', 
-        span: 'md:col-span-4 md:row-span-2' 
+    {
+        src: '/images/IMG_3073.jpeg',
+        location: 'Ipanema, RJ',
+        iso: '200',
+        fstop: 'f/4.0',
+        span: 'md:col-span-4 md:row-span-2',
+        position: 'object-center'
     },
-    { 
-        src: '/images/549828836_18419332501105503_501138226348757160_n.jpg', 
-        location: 'Flamengo, RJ', 
-        iso: '400', 
-        fstop: 'f/2.8', 
-        span: 'md:col-span-8 md:row-span-1' 
+    {
+        src: '/images/IMG_3069.jpeg',
+        location: 'Ipanema, RJ',
+        iso: '100',
+        fstop: 'f/8.0',
+        span: 'md:col-span-8 md:row-span-1',
+        position: 'object-center'
     },
-    { 
-        src: '/images/548924295_1995910624563765_2432624860547887782_n.jpg', 
-        location: 'Iguaba Grande', 
-        iso: '200', 
-        fstop: 'f/4.0', 
-        span: 'md:col-span-4 md:row-span-1'
+    {
+        src: '/images/IMG_3062.jpeg',
+        location: 'Lapa, RJ',
+        iso: '400',
+        fstop: 'f/2.8',
+        span: 'md:col-span-4 md:row-span-1',
+        position: 'object-top'
     },
-    { 
-        src: '/images/553355470_18420160678105503_5472667598786832043_n.jpg', 
-        location: 'Joatinga, RJ', 
-        iso: '50', 
-        fstop: 'f/11', 
-        span: 'md:col-span-4 md:row-span-1'
+    {
+        src: '/images/IMG_3061.jpeg',
+        location: 'Copacabana, RJ',
+        iso: '800',
+        fstop: 'f/2.0',
+        span: 'md:col-span-4 md:row-span-1',
+        position: 'object-center'
     },
-    { 
-        src: '/images/587876238_18432206857105503_1258831775249206120_n.jpg', 
-        location: 'Ipanema, RJ', 
-        iso: '800', 
-        fstop: 'f/1.8', 
-        span: 'md:col-span-4 md:row-span-2'
+    {
+        src: '/images/IMG_3081.jpeg',
+        location: 'Ipanema, RJ',
+        iso: '400',
+        fstop: 'f/1.8',
+        span: 'md:col-span-4 md:row-span-2',
+        position: 'object-[30%]'
     },
-    { 
-        src: '/images/627675207_18442375864105503_3735472153034728000_n.jpg', 
-        location: 'Lapa, RJ', 
-        iso: '400', 
-        fstop: 'f/2.0', 
-        span: 'md:col-span-4 md:row-span-1'
+    {
+        src: '/images/IMG_3067.jpeg',
+        location: 'Ipanema, RJ',
+        iso: '200',
+        fstop: 'f/4.0',
+        span: 'md:col-span-4 md:row-span-1',
+        position: 'object-center'
     },
-    { 
-        src: '/images/589004906_18432206917105503_6478607421801332213_n.jpg', 
-        location: 'Barra da Tijuca', 
-        iso: '100', 
-        fstop: 'f/5.6', 
-        span: 'md:col-span-8 md:row-span-1'
+    {
+        src: '/images/IMG_3068.jpeg',
+        location: 'Copacabana, RJ',
+        iso: '100',
+        fstop: 'f/5.6',
+        span: 'md:col-span-8 md:row-span-1',
+        position: 'object-center'
     },
-    { 
-        src: '/images/628082706_18442375855105503_6809800093599802379_n.jpg', 
-        location: 'Lapa, RJ', 
-        iso: '1600', 
-        fstop: 'f/2.8', 
-        span: 'md:col-span-4 md:row-span-1'
+    {
+        src: '/images/IMG_3075.jpeg',
+        location: 'Ipanema, RJ',
+        iso: '400',
+        fstop: 'f/2.8',
+        span: 'md:col-span-4 md:row-span-1',
+        position: 'object-[25%]'
     },
 ]
 
@@ -131,14 +139,12 @@ function PortfolioSection() {
                     {photos.map((photo, index) => (
                         <div
                             key={index}
-                            className={`group relative overflow-hidden rounded-[3rem] bg-brand-text/5 shadow-sm transition-all duration-700 ${photo.span}`}
+                            className={`group relative overflow-hidden rounded-[3rem] bg-brand-text/5 shadow-sm transition-all duration-700 will-change-transform ${photo.span}`}
                         >
                             <img
                                 src={photo.src}
                                 alt={`Ensaio em ${photo.location}`}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ease-out"
-                                onLoad={(e) => e.target.style.opacity = 1}
-                                style={{ opacity: 1 }} // Force visibility for debugging
+                                className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ease-out ${photo.position}`}
                             />
                             
                             {/* Improved Overlay */}

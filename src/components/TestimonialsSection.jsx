@@ -89,7 +89,7 @@ function TestimonialsSection() {
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className={`p-10 rounded-[3rem] bg-white border border-brand-text/5 flex flex-col justify-between hover:shadow-[0_20px_50px_rgba(249,115,22,0.1)] transition-all duration-500 shadow-sm ${
+                                className={`p-10 rounded-[3rem] bg-white border border-brand-text/5 flex flex-col justify-between hover:shadow-[0_20px_50px_rgba(249,115,22,0.1)] transition-all duration-500 shadow-sm will-change-transform ${
                                     index % 2 !== 0 ? 'md:mt-16' : ''
                                 }`}
                             >
