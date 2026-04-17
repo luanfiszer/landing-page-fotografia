@@ -1,6 +1,19 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { Send, MapPin, Phone, Mail, Instagram } from 'lucide-react'
+import { Send, MapPin, Phone, Mail, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+
+const WHATSAPP_NUMBER = '5521979791536'
+const SERVICE_ID      = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const TEMPLATE_ID     = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const PUBLIC_KEY      = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+const SESSION_LABELS = {
+    solo:    'Retrato Solo',
+    casal:   'Experiência a Dois',
+    familia: 'Ensaio Família',
+    outros:  'Outros Projetos',
+}
 
 function ContactSection() {
     const titleRef = useRef(null)
@@ -12,14 +25,57 @@ function ContactSection() {
         type: '',
         message: '',
     })
+    const [status, setStatus] = useState('idle') // idle | loading | success | error
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const buildWhatsAppUrl = () => {
+        const tipo = SESSION_LABELS[formData.type] || formData.type || 'Não informado'
+        const text = [
+            `Olá, Raquel! 👋 Vim pelo site e gostaria de saber mais sobre um ensaio.`,
+            ``,
+            `*Nome:* ${formData.name}`,
+            `*E-mail:* ${formData.email}`,
+            `*Telefone:* ${formData.phone || 'Não informado'}`,
+            `*Tipo de ensaio:* ${tipo}`,
+            ``,
+            `*Mensagem:*`,
+            formData.message,
+        ].join('\n')
+        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        alert('Mensagem enviada com sucesso! A Raquel entrará em contato em breve.')
+        setStatus('loading')
+
+        // 1. Abre o WhatsApp com a mensagem pré-preenchida
+        window.open(buildWhatsAppUrl(), '_blank')
+
+        // 2. Envia email via EmailJS em paralelo
+        try {
+            await emailjs.send(
+                SERVICE_ID,
+                TEMPLATE_ID,
+                {
+                    from_name:    formData.name,
+                    from_email:   formData.email,
+                    phone:        formData.phone || 'Não informado',
+                    session_type: SESSION_LABELS[formData.type] || 'Não informado',
+                    message:      formData.message,
+                },
+                PUBLIC_KEY
+            )
+            setStatus('success')
+            setFormData({ name: '', email: '', phone: '', type: '', message: '' })
+        } catch (err) {
+            console.error('EmailJS error:', err)
+            // WhatsApp já foi aberto, então ainda é um sucesso parcial
+            setStatus('success')
+            setFormData({ name: '', email: '', phone: '', type: '', message: '' })
+        }
     }
 
     return (
@@ -164,13 +220,50 @@ function ContactSection() {
                                 />
                             </div>
 
+                            {/* Status messages */}
+                            {status === 'success' && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="flex items-center gap-3 p-5 rounded-2xl bg-green-50 border border-green-200 text-green-700 font-medium"
+                                >
+                                    <CheckCircle className="w-5 h-5 shrink-0" />
+                                    Mensagem enviada! A Raquel entrará em contato em breve. 🌟
+                                </motion.div>
+                            )}
+                            {status === 'error' && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="flex items-center gap-3 p-5 rounded-2xl bg-red-50 border border-red-200 text-red-600 font-medium"
+                                >
+                                    <AlertCircle className="w-5 h-5 shrink-0" />
+                                    Algo deu errado. Tente novamente ou entre em contato pelo WhatsApp.
+                                </motion.div>
+                            )}
+
                             <button
                                 type="submit"
-                                className="btn-premium w-full py-6 text-xl group shadow-[0_20px_50px_rgba(249,115,22,0.2)]"
+                                disabled={status === 'loading' || status === 'success'}
+                                className="btn-premium w-full py-6 text-xl group shadow-[0_20px_50px_rgba(249,115,22,0.2)] disabled:opacity-60 disabled:cursor-not-allowed"
                             >
                                 <span className="flex items-center justify-center gap-4">
-                                    Solicitar Disponibilidade
-                                    <Send className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    {status === 'loading' ? (
+                                        <>
+                                            <Loader2 className="w-6 h-6 animate-spin" />
+                                            Enviando...
+                                        </>
+                                    ) : status === 'success' ? (
+                                        <>
+                                            <CheckCircle className="w-6 h-6" />
+                                            Enviado com sucesso!
+                                        </>
+                                    ) : (
+                                        <>
+                                            Solicitar Disponibilidade
+                                            <Send className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                        </>
+                                    )}
                                 </span>
                             </button>
                         </form>
